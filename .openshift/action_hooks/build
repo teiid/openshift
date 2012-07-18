@@ -1,0 +1,28 @@
+#!/bin/bash
+# This is a simple build script and will be executed on your CI system if 
+# available.  Otherwise it will execute while your application is stopped
+# before the deploy step.  This script gets executed directly, so it
+# could be python, php, ruby, etc.
+export
+
+# Create Portfolio directory in $OPENSHIFT_DATA_DIR
+#
+if [ ! -d "$OPENSHIFT_DATA_DIR/Portfolio" ]; then
+    mkdir $OPENSHIFT_DATA_DIR/Portfolio
+fi
+
+# Re-populate the file 
+#
+echo "SYMBOL,PRICE" > "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "RHT,30.00" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "BA,42.75" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "MON,78.75" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "PNRA,84.97" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "SY,24.30" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "BTU,41.25" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "IBM,80.89" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "DELL,10.75" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "HPQ,31.52" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+echo "GE,16.45" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
+
+
