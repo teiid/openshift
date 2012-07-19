@@ -1,12 +1,12 @@
 diff --git a/.openshift/config/standalone.xml b/.openshift/config/standalone.xml
-index 30d9d95..2637345 100644
+index 30d9d95..ba4af32 100644
 --- a/.openshift/config/standalone.xml
 +++ b/.openshift/config/standalone.xml
 @@ -32,6 +32,7 @@
  		<extension module="org.jboss.as.web" />
  		<extension module="org.jboss.as.webservices" />
  		<extension module="org.jboss.as.weld" />
-+        	<extension module="org.jboss.teiid"/>
++		<extension module="org.jboss.teiid" />
  	</extensions>
  
  	<management>

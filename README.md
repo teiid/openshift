@@ -18,8 +18,10 @@ Add the upstream Teiid OpenShift repo
     cd teiiddemo
     git remote add upstream -m master git://github.com/teiid/openshift.git
     git pull -s recursive -X theirs upstream master
+    rm pom.xml
     git apply standalone.diff
     git add .
+    git rm pom.xml
     git commit -m 'Added Teiid Modules and Demo'
 
 Push the repo to origin
