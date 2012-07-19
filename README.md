@@ -1,15 +1,19 @@
-Teiid on OpenShift Express
+Teiid Demo on OpenShift
 ===============================
 
-This template helps you get up and running quickly with the Teiid demo for OpenShift.
+The following steps show you how to deploy the Teiid Demo on OpenShift.
 
-Create an account at http://openshift.redhat.com/
+Create an OpenShift account - see http://openshift.redhat.com/
 
-Create a jbosseap-6.0 application
+Create a jbosseap-6.0 application on OpenShift
 
-    rhc-create-app -a teiiddemo -t jbosseap-6.0
+    rhc app create -a teiiddemo -t jbosseap-6.0
 
-Add this upstream Teiid repo
+Add the MySQL cartridge to your application (make note of the DB credentials returned)
+
+    rhc app cartridge add -a teiiddemo -c mysql-5.1
+
+Add the upstream Teiid OpenShift repo
 
     cd teiiddemo
     git remote add upstream -m master git://github.com/teiid/openshift.git
@@ -18,11 +22,11 @@ Add this upstream Teiid repo
     git add .
     git commit -m 'Added Teiid Modules and Demo'
 
-Then push the repo to origin
+Push the repo to origin
 
     git push
 
-That's it, you can now checkout your application at:
+That's it!  You can now checkout your application at:
 
     http://teiiddemo-$yourdomain.rhcloud.com
 
@@ -33,12 +37,12 @@ This repository will deploy a VDB Manager application at
 
     http://teiiddemo-$yourdomain.rhcloud.com/vdbmanager
 
-On the VDB Manager application page, a link is provided showing how to add different sources.
+On the VDB Manager page, a link is provided to an article which shows how to add sources.
 
 
-Also a simple WebQuery application will be deployed at
+A WebQuery application is also deployed at
 
     http://teiiddemo-$yourdomain.rhcloud.com/webquery
 
-After making VDB modifications, you can go to the Web Query application to run some test queries.
+Go to the WebQuery page to see the available VDB and JDBC sources, and to run test queries.
 
