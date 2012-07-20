@@ -1,9 +1,9 @@
 Teiid Demo on OpenShift
 ===============================
 
-First, you will need an OpenShift account.  If you do not already have an account, please go to https://openshift.redhat.com/app/getting_started
+First, you will need an OpenShift account.  If you do not already have an account, go to https://openshift.redhat.com/app/getting_started to sign up.
 
-Note: the next two steps make use of the command line tool.  If preferred, you can use the OpenShift Web Console to create the jbosseap-6.0 application 
+Note: The first two steps below make use of the OpenShift command line tools.  If preferred, you can use the OpenShift Web Console to create the jbosseap-6.0 application 
 and add the MySQL cartridge.  Both the command line and web console are described at https://openshift.redhat.com/app/getting_started
 
 1) Create a jbosseap-6.0 application on OpenShift
@@ -29,21 +29,25 @@ and add the MySQL cartridge.  Both the command line and web console are describe
 
     git push
 
-That's it!  You can now checkout your application at:
+That's it!  You can now checkout your OpenShift application at:
 
     http://teiiddemo-$yourdomain.rhcloud.com
 
 Getting Started with the Teiid Demo
 -----------------------------------
 
-The 'VDB Manager' application is deployed at 
+An article is provided at https://community.jboss.org/docs/DOC-18405 to help you get started.
+
+Two web applications are deployed with the Teiid OpenShift installation:
+
+VDB Manager' application: 
 
     http://teiiddemo-$yourdomain.rhcloud.com/vdbmanager
 
-On the VDB Manager page, a 'Teiid Source Examples' link is provided.  Click the link to access the demo 'script', which shows how to add sources.
+On the VDB Manager page, a 'Teiid Source Examples' link is provided, which also takes you to the article referenced above.
 
 
-A 'WebQuery' application is also deployed at
+'WebQuery' application:
 
     http://teiiddemo-$yourdomain.rhcloud.com/webquery
 
