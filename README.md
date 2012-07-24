@@ -14,13 +14,12 @@ and add the MySQL cartridge.  Both the command line and web console are describe
 
     rhc app cartridge add -a teiiddemo -c mysql-5.1
 
-NOTE: Save the generated MySQL db info - you will need it later in the demo!  It will look like this:
+NOTE: Save the generated MySQL db info - you will need it later in the demo!  It will contain the following:
 
-Root User: admin
-Root Password: xxxxxxxxx
-Database Name: teiiddemo
-
-Connection URL: mysql://xxx.xxx.xxx.xxx:3306/
+* Root User: admin
+* Root Password: xxxxxxxxx
+* Database Name: teiiddemo
+* Connection URL: mysql://xxx.xxx.xxx.xxx:3306/
 
 3) Add the upstream Teiid OpenShift repo
 
