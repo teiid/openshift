@@ -10,9 +10,17 @@ and add the MySQL cartridge.  Both the command line and web console are describe
 
     rhc app create -a teiiddemo -t jbosseap-6.0
 
-2) Add the MySQL cartridge to your application (make note of the DB credentials returned)
+2) Add the MySQL cartridge to your application
 
     rhc app cartridge add -a teiiddemo -c mysql-5.1
+
+NOTE: Save the generated MySQL db info - you will need it later in the demo!  It will look like this:
+
+Root User: admin
+Root Password: xxxxxxxxx
+Database Name: teiiddemo
+
+Connection URL: mysql://xxx.xxx.xxx.xxx:3306/
 
 3) Add the upstream Teiid OpenShift repo
 
@@ -36,7 +44,7 @@ That's it!  You can now checkout your OpenShift application at:
 Getting Started with the Teiid Demo
 -----------------------------------
 
-An article is provided at https://community.jboss.org/docs/DOC-18405 to help you get started.
+An article is provided at https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-SourceManagement to help you get started.
 
 Two web applications are deployed with the Teiid OpenShift installation:
 
