@@ -43,7 +43,7 @@ That's it!  You can now checkout your OpenShift application at:
 Getting Started with the Teiid Demo
 -----------------------------------
 
-An article is provided at https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-SourceManagement to help you get started.
+An article is provided at https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-Part1-SourceManagement to help you get started.
 
 Two web applications are deployed with the Teiid OpenShift installation:
 
