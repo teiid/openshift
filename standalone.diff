@@ -1,5 +1,5 @@
 diff --git a/.openshift/config/standalone.xml b/.openshift/config/standalone.xml
-index 30d9d95..ba4af32 100644
+index 30d9d95..34f90c3 100644
 --- a/.openshift/config/standalone.xml
 +++ b/.openshift/config/standalone.xml
 @@ -32,6 +32,7 @@
@@ -38,15 +38,15 @@ index 30d9d95..ba4af32 100644
  		</subsystem>
  		<subsystem xmlns="urn:jboss:domain:jacorb:1.2">
  			<orb>
-@@ -450,9 +465,58 @@
+@@ -450,9 +465,64 @@
                          <policy-module code="Delegating" flag="required"/>
                      </authorization>
                  </security-domain>
 +                <security-domain name="teiid-security" cache-type="default">
 +                    <authentication>
-+                        <login-module code="UsersRoles" flag="required">
-+                            <module-option name="usersProperties" value="teiid-security-users.properties"/>
-+                            <module-option name="rolesProperties" value="teiid-security-roles.properties"/>
++                        <login-module code="org.jboss.security.auth.spi.UsersRolesLoginModule" flag="required">
++                            <module-option name="usersProperties" value="${jboss.server.config.dir}/teiid-security-users.properties"/>
++                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/teiid-security-roles.properties"/>
 +                        </login-module>
 +                    </authentication>
 +                </security-domain>
@@ -59,6 +59,12 @@ index 30d9d95..ba4af32 100644
 +            </async-thread-pool>
 +            <resultset-cache infinispan-container="teiid"/>
 +            <transport name="embedded"/>
++            <transport name="jdbc" socket-binding="teiid-jdbc">
++                <authentication security-domain="teiid-security"/>
++            </transport>
++            <transport name="odbc" socket-binding="teiid-odbc" protocol="pg">
++                <authentication security-domain="teiid-security"/>
++            </transport>
 +            <translator name="access" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="db2" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="derby" module="org.jboss.teiid.translator.jdbc"/>
@@ -98,7 +104,13 @@ index 30d9d95..ba4af32 100644
  		<subsystem xmlns="urn:jboss:domain:transactions:1.2">
  			<core-environment>
  				<process-id>
-@@ -528,4 +592,4 @@
+@@ -524,8 +594,10 @@
+ 		<socket-binding name="remoting" port="4447" />
+ 		<socket-binding name="txn-recovery-environment" port="4712" />
+ 		<socket-binding name="txn-status-manager" port="4713" />
++                <socket-binding name="teiid-jdbc" port="31000"/>
++                <socket-binding name="teiid-odbc" port="35432"/>
+ 		<outbound-socket-binding name="mail-smtp">
  			<remote-destination host="localhost" port="25" />
  		</outbound-socket-binding>
  	</socket-binding-group>
