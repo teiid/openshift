@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.0" name="org.jboss.teiid.translator.loopback">
     <resources>
-        <resource-root path="translator-loopback-8.2.0.Alpha1-SNAPSHOT.jar" />
+        <resource-root path="translator-loopback-8.2.0.Beta1-SNAPSHOT.jar" />
         <!-- Insert resources here -->
     </resources>
 
