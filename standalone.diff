@@ -1,5 +1,5 @@
 diff --git a/.openshift/config/standalone.xml b/.openshift/config/standalone.xml
-index 30d9d95..34f90c3 100644
+index ce8a2eb..9d7b42f 100644
 --- a/.openshift/config/standalone.xml
 +++ b/.openshift/config/standalone.xml
 @@ -32,6 +32,7 @@
@@ -10,7 +10,7 @@ index 30d9d95..34f90c3 100644
  	</extensions>
  
  	<management>
-@@ -129,6 +130,14 @@
+@@ -135,6 +136,14 @@
  						<xa-datasource-class>org.postgresql.xa.PGXADataSource
  						</xa-datasource-class>
  					</driver>
@@ -25,20 +25,30 @@ index 30d9d95..34f90c3 100644
  				</drivers>
  			</datasources>
  		</subsystem>
-@@ -249,6 +258,12 @@
+@@ -255,6 +264,22 @@
  					<eviction strategy="NONE" />
  				</replicated-cache>
  			</cache-container>
-+                        <cache-container name="teiid" default-cache="resultset" module="org.jboss.as.jpa.hibernate:4">
++                        <cache-container name="teiid" default-cache="resultset">
 +                               <local-cache name="resultset">
-+                                        <eviction strategy="LRU" max-entries="1024"/>
++                                        <transaction mode="NON_XA"/>
++                                        <eviction strategy="LIRS" max-entries="1024"/>
 +                                        <expiration lifespan="7200000"/>
++                               </local-cache>
++                               <local-cache name="resultset-repl">
++                                        <transaction mode="NON_XA"/>
++                                        <eviction strategy="LIRS" max-entries="1024"/>
++                                        <expiration lifespan="7200000"/>
++                               </local-cache>
++                               <local-cache name="preparedplan">
++                                        <eviction strategy="LIRS" max-entries="512"/>
++                                        <expiration lifespan="28800"/>
 +                               </local-cache>
 +                        </cache-container>
  		</subsystem>
  		<subsystem xmlns="urn:jboss:domain:jacorb:1.2">
  			<orb>
-@@ -450,9 +465,64 @@
+@@ -456,9 +481,72 @@
                          <policy-module code="Delegating" flag="required"/>
                      </authorization>
                  </security-domain>
@@ -57,7 +67,11 @@ index 30d9d95..34f90c3 100644
 +            <async-thread-pool>
 +                teiid-async
 +            </async-thread-pool>
++            <policy-decider-module>
++                org.jboss.teiid
++            </policy-decider-module>
 +            <resultset-cache infinispan-container="teiid"/>
++            <preparedplan-cache infinispan-container="teiid"/>
 +            <transport name="embedded"/>
 +            <transport name="jdbc" socket-binding="teiid-jdbc">
 +                <authentication security-domain="teiid-security"/>
@@ -72,14 +86,18 @@ index 30d9d95..34f90c3 100644
 +            <translator name="h2" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="hive" module="org.jboss.teiid.translator.hive"/>
 +            <translator name="hsql" module="org.jboss.teiid.translator.jdbc"/>
++            <translator name="infinispan-cache" module="org.jboss.teiid.translator.object"/>
++            <translator name="infinispanremote-cache" module="org.jboss.teiid.translator.object"/>
 +            <translator name="informix" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="ingres" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="ingres93" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="intersystems-cache" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="jdbc-ansi" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="jdbc-simple" module="org.jboss.teiid.translator.jdbc"/>
++            <translator name="jpa2" module="org.jboss.teiid.translator.jpa"/>
 +            <translator name="ldap" module="org.jboss.teiid.translator.ldap"/>
 +            <translator name="loopback" module="org.jboss.teiid.translator.loopback"/>
++            <translator name="map-cache" module="org.jboss.teiid.translator.object"/>
 +            <translator name="metamatrix" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="modeshape" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="mysql" module="org.jboss.teiid.translator.jdbc"/>
@@ -104,7 +122,7 @@ index 30d9d95..34f90c3 100644
  		<subsystem xmlns="urn:jboss:domain:transactions:1.2">
  			<core-environment>
  				<process-id>
-@@ -524,8 +594,10 @@
+@@ -530,8 +618,10 @@
  		<socket-binding name="remoting" port="4447" />
  		<socket-binding name="txn-recovery-environment" port="4712" />
  		<socket-binding name="txn-status-manager" port="4713" />
