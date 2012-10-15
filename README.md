@@ -36,9 +36,9 @@ NOTE: Save the generated MySQL db info - you will need it later in the demo!  It
 
     git push
 
-That's it!  You can now checkout your OpenShift application at:
+That's it!  Once the git push is completed, the application will restart on OpenShift.
+After a couple minutes, the demo applications will be deployed, and you can access them as described below:
 
-    http://teiiddemo-$yourdomain.rhcloud.com
 
 Getting Started with the Teiid Demo
 -----------------------------------
