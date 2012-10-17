@@ -63,13 +63,11 @@ Demo Articles
 -----------------------------------
 A series of articles are provided, which walk you through the integration examples:
 
-1) MySQL, Salesforce and Twitter WebService Integration
-This demo walks you through integration of a MySQL database, Salesforce, and Twitter WebService
+1) MySQL, Salesforce and Twitter WebService Integration:  This demo walks you through integration of a MySQL database, Salesforce, and Twitter WebService
 
 https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-Part1-SourceManagement
 
-2) MySQL and SAP NetWeaver Gateway Integration
-This demo walks you through integration of a MySQL database with the SAP Netweaver Gateway service
+2) MySQL and SAP NetWeaver Gateway Integration:  This demo walks you through integration of a MySQL database with the SAP Netweaver Gateway service
 
 https://community.jboss.org/wiki/TeiidOnOpenShift-SAPIntegrationExample
 
