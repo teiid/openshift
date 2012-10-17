@@ -58,17 +58,19 @@ On the VDB Manager page, a 'Teiid Source Examples' link is provided, which also 
 
 On the WebQuery page, you can see the available VDB and JDBC sources, and run test queries.
 
-Demo Articles:
+
+Demo Articles
+-----------------------------------
 A series of articles are provided, which walk you through the integration examples:
 
-1) MySQL, Salesforce and Twitter WebService
+1) MySQL, Salesforce and Twitter WebService Integration
 This demo walks you through integration of a MySQL database, Salesforce, and Twitter WebService
 
-	https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-Part1-SourceManagement
+https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-Part1-SourceManagement
 
-2) MySQL and SAP NetWeaver Gateway
+2) MySQL and SAP NetWeaver Gateway Integration
 This demo walks you through integration of a MySQL database with the SAP Netweaver Gateway service
 
-	https://community.jboss.org/wiki/TeiidOnOpenShift-SAPIntegrationExample
+https://community.jboss.org/wiki/TeiidOnOpenShift-SAPIntegrationExample
 
 
