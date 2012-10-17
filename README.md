@@ -36,22 +36,20 @@ NOTE: Save the generated MySQL db info - you will need it later in the demo!  It
 
     git push
 
-That's it!  You can now checkout your OpenShift application at:
+That's it!  Once the git push is completed, the application will restart on OpenShift.
+After a couple minutes, the demo applications will be deployed, and you can access them as described below:
 
-    http://teiiddemo-$yourdomain.rhcloud.com
 
 Getting Started with the Teiid Demo
 -----------------------------------
 
-An article is provided at https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-Part1-SourceManagement to help you get started.
-
 Two web applications are deployed with the Teiid OpenShift installation:
 
-VDB Manager' application: 
+'VDB Manager' application: 
 
     http://teiiddemo-$yourdomain.rhcloud.com/vdbmanager
 
-On the VDB Manager page, a 'Teiid Source Examples' link is provided, which also takes you to the article referenced above.
+On the VDB Manager page, a 'Teiid Source Examples' link is provided, which also takes you to the articles referenced below.
 
 
 'WebQuery' application:
@@ -59,4 +57,18 @@ On the VDB Manager page, a 'Teiid Source Examples' link is provided, which also 
     http://teiiddemo-$yourdomain.rhcloud.com/webquery
 
 On the WebQuery page, you can see the available VDB and JDBC sources, and run test queries.
+
+
+Demo Articles
+-----------------------------------
+A series of articles are provided, which walk you through the integration examples:
+
+1) MySQL, Salesforce and Twitter WebService Integration:  This demo walks you through integration of a MySQL database, Salesforce, and Twitter WebService
+
+https://community.jboss.org/wiki/TeiidOnOpenShiftDemo-Part1-SourceManagement
+
+2) MySQL and SAP NetWeaver Gateway Integration:  This demo walks you through integration of a MySQL database with the SAP Netweaver Gateway service
+
+https://community.jboss.org/wiki/TeiidOnOpenShift-SAPIntegrationExample
+
 
