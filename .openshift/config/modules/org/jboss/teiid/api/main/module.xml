@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.0" name="org.jboss.teiid.api">
     <resources>
-        <resource-root path="teiid-api-8.2.0.Beta1-SNAPSHOT.jar" />
+        <resource-root path="teiid-api-8.2.0.Final.jar" />
         <!-- Insert resources here -->
     </resources>
 
@@ -10,6 +10,7 @@
         <module name="javax.api"/>
         <module name="javax.resource.api"/>
         <module name="org.jboss.teiid.common-core"/>    
-        <module name="org.jboss.teiid.client" />
+        <module name="org.jboss.teiid.client"/>
+        <module name="org.jboss.teiid.admin"/>
     </dependencies>
 </module>

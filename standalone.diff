@@ -1,5 +1,5 @@
 diff --git a/.openshift/config/standalone.xml b/.openshift/config/standalone.xml
-index ce8a2eb..9d7b42f 100644
+index 484919a..a890c1c 100644
 --- a/.openshift/config/standalone.xml
 +++ b/.openshift/config/standalone.xml
 @@ -32,6 +32,7 @@
@@ -8,9 +8,9 @@ index ce8a2eb..9d7b42f 100644
  		<extension module="org.jboss.as.weld" />
 +		<extension module="org.jboss.teiid" />
  	</extensions>
- 
- 	<management>
-@@ -135,6 +136,14 @@
+ 	
+ 	<system-properties>
+@@ -140,6 +141,14 @@
  						<xa-datasource-class>org.postgresql.xa.PGXADataSource
  						</xa-datasource-class>
  					</driver>
@@ -25,7 +25,7 @@ index ce8a2eb..9d7b42f 100644
  				</drivers>
  			</datasources>
  		</subsystem>
-@@ -255,6 +264,22 @@
+@@ -260,6 +269,22 @@
  					<eviction strategy="NONE" />
  				</replicated-cache>
  			</cache-container>
@@ -48,7 +48,7 @@ index ce8a2eb..9d7b42f 100644
  		</subsystem>
  		<subsystem xmlns="urn:jboss:domain:jacorb:1.2">
  			<orb>
-@@ -456,9 +481,72 @@
+@@ -461,9 +486,72 @@
                          <policy-module code="Delegating" flag="required"/>
                      </authorization>
                  </security-domain>
@@ -122,7 +122,7 @@ index ce8a2eb..9d7b42f 100644
  		<subsystem xmlns="urn:jboss:domain:transactions:1.2">
  			<core-environment>
  				<process-id>
-@@ -530,8 +618,10 @@
+@@ -534,6 +622,8 @@
  		<socket-binding name="remoting" port="4447" />
  		<socket-binding name="txn-recovery-environment" port="4712" />
  		<socket-binding name="txn-status-manager" port="4713" />
@@ -131,7 +131,3 @@ index ce8a2eb..9d7b42f 100644
  		<outbound-socket-binding name="mail-smtp">
  			<remote-destination host="localhost" port="25" />
  		</outbound-socket-binding>
- 	</socket-binding-group>
--</server>
-\ No newline at end of file
-+</server>
