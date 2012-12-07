@@ -26,10 +26,8 @@ NOTE: Save the generated MySQL db info - you will need it later in the demo!  It
     cd teiiddemo
     git remote add upstream -m master git://github.com/teiid/openshift.git
     git pull -s recursive -X theirs upstream master
-    rm pom.xml
     git apply standalone.diff
     git add .
-    git rm pom.xml
     git commit -m 'Added Teiid Modules and Demo'
 
 4) Push the repo to origin

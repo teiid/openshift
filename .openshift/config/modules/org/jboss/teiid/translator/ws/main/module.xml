@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.0" name="org.jboss.teiid.translator.ws">
     <resources>
-        <resource-root path="translator-ws-8.2.0.Beta1-SNAPSHOT.jar" />
+        <resource-root path="translator-ws-8.2.0.Final.jar" />
         <!-- Insert resources here -->
     </resources>
 
@@ -11,6 +11,7 @@
         <module name="javax.resource.api"/>
         <module name="org.jboss.teiid.common-core" />
         <module name="org.jboss.teiid.api" />
+        <module name="javax.wsdl4j.api"/>
         <module name="org.springframework.spring" optional="true"/>  
     </dependencies>
 </module>

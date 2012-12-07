@@ -8,7 +8,7 @@
 #
 set -e
 
-if [ -z $OPENSHIFT_DB_HOST ]
+if [ -z $OPENSHIFT_MYSQL_DB_HOST ]
 then
     echo 1>&2
     echo "Could not find mysql database.  Please run:" 1>&2
@@ -19,21 +19,21 @@ then
 fi
 
 # check for database.
-if ! /usr/bin/mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" -e "show tables;" $OPENSHIFT_APP_NAME > /dev/null
+if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -e "show tables;" $OPENSHIFT_APP_NAME > /dev/null
 then
     echo 1>&2
     echo "Could not find mysql database. " 1>&2
     echo "Creating database for application named: $OPENSHIFT_APP_NAME." 1 >&2
-    /usr/bin/mysqladmin -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" create "$OPENSHIFT_APP_NAME"
+    /usr/bin/mysqladmin -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" create "$OPENSHIFT_APP_NAME"
 fi
 
 # Confirm database exists, if not create it
-if ! /usr/bin/mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" -e "select * from ACCOUNT;" "$OPENSHIFT_APP_NAME" > /dev/null
+if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -e "select * from ACCOUNT;" "$OPENSHIFT_APP_NAME" > /dev/null
 then
     echo
     echo "Schema not found --> Importing schema from .openshift/action_hooks/customer-schema.sql"
     echo
-    /usr/bin/mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" "$OPENSHIFT_APP_NAME" < "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/customer-schema.sql"
+    /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" "$OPENSHIFT_APP_NAME" < "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/customer-schema.sql"
     echo
     echo "done."
 else
