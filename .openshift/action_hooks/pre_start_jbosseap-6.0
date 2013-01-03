@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export JAVA_OPTS="$JAVA_OPTS -Djboss.client_socket_bind_address=${OPENSHIFT_INTERNAL_IP}"
+echo JAVA_OPTS = $JAVA_OPTS
+
 # The pre_start_cartridge and pre_stop_cartridge hooks are *SOURCED*
 # immediately before (re)starting or stopping the specified cartridge.
 # They are able to make any desired environment variable changes as
