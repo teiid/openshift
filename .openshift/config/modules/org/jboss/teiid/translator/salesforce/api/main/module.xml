@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.0" name="org.jboss.teiid.translator.salesforce.api">
     <resources>
-        <resource-root path="salesforce-api-8.2.0.Final.jar" />
+        <resource-root path="salesforce-api-8.4.1.jar" />
+        <resource-root path="force-wsc-26.0.0.jar" />
         <!-- Insert resources here -->
     </resources>
 
