@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export JAVA_OPTS="$JAVA_OPTS -Djboss.client_socket_bind_address=${OPENSHIFT_INTERNAL_IP}"
+export JAVA_OPTS="$JAVA_OPTS -Djboss.management.client_socket_bind_address=${OPENSHIFT_JBOSSEAP_IP}"
 echo JAVA_OPTS = $JAVA_OPTS
 
 # The pre_start_cartridge and pre_stop_cartridge hooks are *SOURCED*
