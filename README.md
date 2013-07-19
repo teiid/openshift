@@ -12,7 +12,7 @@ and add the MySQL cartridge.  Both the command line and web console are describe
 
 2) Add the MySQL cartridge to your application
 
-    rhc app cartridge add -a teiiddemo -c mysql-5.1
+    rhc cartridge-add -a teiiddemo -c mysql-5.1
 
 NOTE: Save the generated MySQL db info - you will need it later in the demo!  It will contain the following:
 
@@ -26,7 +26,7 @@ NOTE: Save the generated MySQL db info - you will need it later in the demo!  It
     cd teiiddemo
     git remote add upstream -m master git://github.com/teiid/openshift.git
     git pull -s recursive -X theirs upstream master
-    git apply standalone.diff
+    git apply standalone.diff --whitespace=nowarn
     git add .
     git commit -m 'Added Teiid Modules and Demo'
 
