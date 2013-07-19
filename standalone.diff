@@ -1,54 +1,87 @@
 diff --git a/.openshift/config/standalone.xml b/.openshift/config/standalone.xml
-index 484919a..1a522dc 100644
+index 6e61194..a82102b 100755
 --- a/.openshift/config/standalone.xml
 +++ b/.openshift/config/standalone.xml
-@@ -32,6 +32,7 @@
+@@ -27,6 +27,7 @@
+ 		<extension module="org.jboss.as.remoting" />
+ 		<extension module="org.jboss.as.sar" />
+ 		<extension module="org.jboss.as.security" />
++        	<extension module="org.jboss.teiid"/>
+ 		<extension module="org.jboss.as.threads" />
+ 		<extension module="org.jboss.as.transactions" />
  		<extension module="org.jboss.as.web" />
- 		<extension module="org.jboss.as.webservices" />
- 		<extension module="org.jboss.as.weld" />
-+                <extension module="org.jboss.teiid"/>
- 	</extensions>
- 	
- 	<system-properties>
-@@ -140,6 +141,14 @@
+@@ -150,6 +151,14 @@
  						<xa-datasource-class>org.postgresql.xa.PGXADataSource
  						</xa-datasource-class>
  					</driver>
-+                                        <driver name="teiid-local" module="org.jboss.teiid">
-+                                                <driver-class>org.teiid.jdbc.TeiidDriver</driver-class>
-+                                                <xa-datasource-class>org.teiid.jdbc.TeiidDataSource</xa-datasource-class>
-+                                        </driver>
-+                                        <driver name="teiid" module="org.jboss.teiid.client">
-+                                                <driver-class>org.teiid.jdbc.TeiidDriver</driver-class>
-+                                                <xa-datasource-class>org.teiid.jdbc.TeiidDataSource</xa-datasource-class>
-+                                        </driver>
++					<driver name="teiid-local" module="org.jboss.teiid">
++					    <driver-class>org.teiid.jdbc.TeiidDriver</driver-class>
++					    <xa-datasource-class>org.teiid.jdbc.TeiidDataSource</xa-datasource-class>
++					</driver>
++					<driver name="teiid" module="org.jboss.teiid.client">
++					    <driver-class>org.teiid.jdbc.TeiidDriver</driver-class>
++					    <xa-datasource-class>org.teiid.jdbc.TeiidDataSource</xa-datasource-class>
++					</driver> 
  				</drivers>
  			</datasources>
  		</subsystem>
-@@ -260,6 +269,22 @@
+@@ -270,6 +279,22 @@
  					<eviction strategy="NONE" />
  				</replicated-cache>
  			</cache-container>
-+                        <cache-container name="teiid" default-cache="resultset">
-+                                <local-cache name="resultset">
-+                                        <transaction mode="NON_XA"/>
-+                                        <expiration lifespan="7200000" />
-+                                        <eviction max-entries="1024" strategy="LIRS"/>
-+                                </local-cache>
-+                                <local-cache name="resultset-repl">
-+	                                <transaction mode="NON_XA"/>
-+                                        <expiration lifespan="7200000" />
-+                                        <eviction max-entries="1024" strategy="LIRS"/>
-+                                </local-cache>
-+                                <local-cache name="preparedplan">
-+                                        <expiration lifespan="28800" />
-+                                        <eviction max-entries="512" strategy="LIRS"/>
-+                                </local-cache>
-+                        </cache-container>
++            		<cache-container name="teiid" default-cache="resultset">
++                	    <local-cache name="resultset">
++                	        <transaction mode="NON_XA"/>
++                    	        <expiration lifespan="7200000" />
++                    	        <eviction max-entries="1024" strategy="LIRS"/>
++                	    </local-cache>
++                	    <local-cache name="resultset-repl">
++	                        <transaction mode="NON_XA"/>
++                    	        <expiration lifespan="7200000" />
++                    	        <eviction max-entries="1024" strategy="LIRS"/>
++                	    </local-cache>                
++                	    <local-cache name="preparedplan">
++                    	        <expiration lifespan="28800" />
++                    	        <eviction max-entries="512" strategy="LIRS"/>
++                	    </local-cache>  
++            		</cache-container>            
  		</subsystem>
  		<subsystem xmlns="urn:jboss:domain:jacorb:1.2">
  			<orb>
-@@ -461,9 +486,67 @@
+@@ -435,7 +460,31 @@
+ 		<subsystem xmlns="urn:jboss:domain:remoting:1.1">
+ 			<connector name="remoting-connector" socket-binding="remoting" />
+ 		</subsystem>
+-		<subsystem xmlns="urn:jboss:domain:resource-adapters:1.0" />
++        <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1">
++            <resource-adapters>
++                <resource-adapter id="file">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.file"/>
++                </resource-adapter>
++                <resource-adapter id="google">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.google"/>
++                </resource-adapter>
++                <resource-adapter id="infinispan">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.infinispan"/>
++                </resource-adapter>
++                <resource-adapter id="ldap">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.ldap"/>
++                </resource-adapter>
++                <resource-adapter id="salesforce">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.salesforce"/>
++                </resource-adapter>
++                <resource-adapter id="webservice">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.webservice"/>
++                </resource-adapter>
++               <resource-adapter id="mongodb">
++                    <module slot="main" id="org.jboss.teiid.resource-adapter.mongodb"/>
++                </resource-adapter>
++            </resource-adapters>        
++        </subsystem>
+ 		<subsystem xmlns="urn:jboss:domain:sar:1.0" />
+ 		<subsystem xmlns="urn:jboss:domain:security:1.2">
+             <security-domains>
+@@ -459,9 +508,74 @@
                          <policy-module code="Delegating" flag="required"/>
                      </authorization>
                  </security-domain>
@@ -59,7 +92,7 @@ index 484919a..1a522dc 100644
 +                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/teiid-security-roles.properties"/>
 +                        </login-module>
 +                    </authentication>
-+                </security-domain>
++                </security-domain>                
              </security-domains>
          </subsystem>
 -		<subsystem xmlns="urn:jboss:domain:threads:1.1" />
@@ -67,14 +100,18 @@ index 484919a..1a522dc 100644
 +            <async-thread-pool>teiid-async</async-thread-pool>
 +            <resultset-cache infinispan-container="teiid" name="resultset"/>
 +            <preparedplan-cache infinispan-container="teiid" name="preparedplan"/>
++            
 +            <transport name="embedded"/>
++            <transport name="odata">
++                <authentication security-domain="teiid-security"/>
++            </transport>
 +            <transport name="jdbc" protocol="teiid" socket-binding="teiid-jdbc">
 +                <authentication security-domain="teiid-security"/>
 +            </transport>
 +            <transport name="odbc" protocol="pg" socket-binding="teiid-odbc">
 +                <authentication security-domain="teiid-security"/>
 +            </transport>
-+            <policy-decider-module>org.jboss.teiid</policy-decider-module>
++            <policy-decider-module>org.jboss.teiid</policy-decider-module>        
 +            <translator name="jdbc-simple" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="jdbc-ansi" module="org.jboss.teiid.translator.jdbc"/>
 +            <translator name="access" module="org.jboss.teiid.translator.jdbc"/>
@@ -107,22 +144,25 @@ index 484919a..1a522dc 100644
 +            <translator name="jpa2" module="org.jboss.teiid.translator.jpa"/>
 +            <translator name="infinispan-cache" module="org.jboss.teiid.translator.object"/>
 +            <translator name="map-cache" module="org.jboss.teiid.translator.object"/>
-+        </subsystem>
++            <translator name="odata" module="org.jboss.teiid.translator.odata"/>
++            <translator name="mongodb" module="org.jboss.teiid.translator.mongodb"/>
++            
++        </subsystem>        
 +        <subsystem xmlns="urn:jboss:domain:threads:1.1">
 +            <bounded-queue-thread-pool name="teiid-async">
 +                <max-threads count="4"/>
 +                <queue-length count="100"/>
-+            </bounded-queue-thread-pool>
++            </bounded-queue-thread-pool>        
 +        </subsystem>
  		<subsystem xmlns="urn:jboss:domain:transactions:1.2">
  			<core-environment>
  				<process-id>
-@@ -534,6 +617,8 @@
+@@ -530,6 +644,8 @@
  		<socket-binding name="remoting" port="4447" />
  		<socket-binding name="txn-recovery-environment" port="4712" />
  		<socket-binding name="txn-status-manager" port="4713" />
 +                <socket-binding name="teiid-jdbc" port="31000"/>
-+                <socket-binding name="teiid-odbc" port="35432"/>
++                <socket-binding name="teiid-odbc" port="35432"/>        
  		<outbound-socket-binding name="mail-smtp">
  			<remote-destination host="localhost" port="25" />
  		</outbound-socket-binding>

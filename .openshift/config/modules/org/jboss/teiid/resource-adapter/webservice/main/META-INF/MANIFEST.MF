@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: hudson
+Build-Jdk: 1.6.0_45
+Dependencies: javax.jws.api,org.apache.cxf,javax.wsdl4j.api,org.jboss.
+ teiid.common-core,org.jboss.teiid.api,javax.api
+
