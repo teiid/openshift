@@ -88,8 +88,8 @@ index 6e61194..a82102b 100755
 +                <security-domain name="teiid-security" cache-type="default">
 +                    <authentication>
 +                        <login-module code="org.jboss.security.auth.spi.UsersRolesLoginModule" flag="required">
-+                            <module-option name="usersProperties" value="${jboss.server.config.dir}/teiid-security-users.properties"/>
-+                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/teiid-security-roles.properties"/>
++                            <module-option name="usersProperties" value="${env.OPENSHIFT_DATA_DIR}TeiidConfig/teiid-security-users.properties"/>
++                            <module-option name="rolesProperties" value="${env.OPENSHIFT_DATA_DIR}TeiidConfig/teiid-security-roles.properties"/>
 +                        </login-module>
 +                    </authentication>
 +                </security-domain>                

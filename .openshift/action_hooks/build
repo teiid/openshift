@@ -25,4 +25,19 @@ echo "DELL,10.75" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
 echo "HPQ,31.52" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
 echo "GE,16.45" >> "$OPENSHIFT_DATA_DIR/Portfolio/marketdata-price.txt"
 
+# Create teiidConfig directory in $OPENSHIFT_DATA_DIR
+#
+if [ ! -d "$OPENSHIFT_DATA_DIR/TeiidConfig" ]; then
+    mkdir $OPENSHIFT_DATA_DIR/TeiidConfig
+fi
+
+# Re-populate the teiid-security-users.properties file 
+#
+echo "# username=password" > "$OPENSHIFT_DATA_DIR/TeiidConfig/teiid-security-users.properties"
+echo "user=user" >> "$OPENSHIFT_DATA_DIR/TeiidConfig/teiid-security-users.properties"
+
+# Re-populate the teiid-security-roles.properties file 
+#
+echo "# username=role1,role2" > "$OPENSHIFT_DATA_DIR/TeiidConfig/teiid-security-roles.properties"
+echo "user=odata,example-role" >> "$OPENSHIFT_DATA_DIR/TeiidConfig/teiid-security-roles.properties"
 
