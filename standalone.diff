@@ -1,15 +1,15 @@
 diff --git a/.openshift/config/standalone.xml b/.openshift/config/standalone.xml
-index 6e61194..a82102b 100755
+index cce8c5e..6298364 100755
 --- a/.openshift/config/standalone.xml
 +++ b/.openshift/config/standalone.xml
-@@ -27,6 +27,7 @@
- 		<extension module="org.jboss.as.remoting" />
- 		<extension module="org.jboss.as.sar" />
- 		<extension module="org.jboss.as.security" />
-+        	<extension module="org.jboss.teiid"/>
- 		<extension module="org.jboss.as.threads" />
- 		<extension module="org.jboss.as.transactions" />
+@@ -32,6 +32,7 @@
  		<extension module="org.jboss.as.web" />
+ 		<extension module="org.jboss.as.webservices" />
+ 		<extension module="org.jboss.as.weld" />
++        	<extension module="org.jboss.teiid"/>
+ 	</extensions>
+ 	
+ 	<system-properties>
 @@ -150,6 +151,14 @@
  						<xa-datasource-class>org.postgresql.xa.PGXADataSource
  						</xa-datasource-class>
@@ -158,7 +158,7 @@ index 6e61194..a82102b 100755
  			<core-environment>
  				<process-id>
 @@ -530,6 +644,8 @@
- 		<socket-binding name="remoting" port="4447" />
+ 		<socket-binding name="remoting" port="${env.OPENSHIFT_JBOSSEAP_REMOTING_PORT}" />
  		<socket-binding name="txn-recovery-environment" port="4712" />
  		<socket-binding name="txn-status-manager" port="4713" />
 +                <socket-binding name="teiid-jdbc" port="31000"/>
