@@ -1,3 +1,7 @@
+OBSOLETE
+===============================
+This Demo is now OBSOLETE - for the latest, please see http://github.com/jboss-datavirtualization/openshift-cartridge-datavirtualization
+
 Teiid Demo on OpenShift
 ===============================
 
